@@ -15,7 +15,10 @@ class ShipController extends Controller
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
-        $ships = DB::select('select * from ship_en INNER JOIN ship_url WHERE ship_en.id = ship_url.ship_id LIMIT ? , ?',[$start,$start+$per_page]);
+        $ships = DB::select('select * from ship_en LIMIT ? , ?',[$start,$start+$per_page]);
+        $pic_url = $ships['pic_url'];
+        $pic_urls = DB::select('select * from ship_url WHERE ship_id = ?',[$pic_url]);
+        $ships['pic_url'] = $pic_urls;
 
         return $ships;
     }
