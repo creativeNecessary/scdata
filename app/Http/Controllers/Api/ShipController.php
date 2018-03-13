@@ -23,6 +23,6 @@ class ShipController extends Controller
 //            $ship['pic_url'] = $pic_urls;
 //        }
 //        unset($ship);
-        return $this->onSuccess($ships);
+        return $this->getStatusCode();
     }
 }
