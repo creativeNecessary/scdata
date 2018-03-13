@@ -23,6 +23,6 @@ class ShipController extends Controller
 //            $pic_urls = DB::select('select * from ship_url WHERE ship_id = ?',[$pic_url]);
 //            $ship['pic_url'] = $pic_urls;
 
-        return $ships;
+        return $ships[0];
     }
 }
