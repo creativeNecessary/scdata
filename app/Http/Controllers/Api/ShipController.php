@@ -23,7 +23,6 @@ class ShipController extends Controller
 //            $ship['pic_url'] = $pic_urls;
 //        }
 //        unset($ship);
-
-        return $ships;
+        return $this->onSuccess($ships);
     }
 }
