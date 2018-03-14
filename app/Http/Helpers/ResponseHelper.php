@@ -20,13 +20,13 @@ class ResponseHelper
         $data = self::handleData($data);
         $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data));
 
-        return gettype($response);
+        return $response;
     }
 
 
     private static function handleData($data){
         if(is_array($data)){
-           return  "{" + json_encode($data) + "}";
+           return  "{" . json_encode($data) . "}";
         }
         return $data;
     }
