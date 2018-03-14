@@ -17,11 +17,18 @@ class ResponseHelper
     public static function json($data, $msg, $status, $code)
     {
 
-        if (is_array($data)) {
-        }
+        $data = self::handleData($data);
         $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data));
 
         return gettype($response);
+    }
+
+
+    private static function handleData($data){
+        if(is_array($data)){
+           return  "{" + json_encode($data) + "}";
+        }
+        return $data;
     }
 
 }
