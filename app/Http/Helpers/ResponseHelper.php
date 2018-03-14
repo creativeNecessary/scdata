@@ -24,10 +24,13 @@ class ResponseHelper
     }
 
 
-    private static function handleData($data){
-        if(is_array($data)){
-            $json_str = "{" . json_encode($data) . "}";
-           return json_decode($json_str) ;
+    private static function handleData($data)
+    {
+        if (is_array($data)) {
+            $obj = new stdClass();
+            $obj->data = $data;
+
+            return $obj;
         }
         return $data;
     }
