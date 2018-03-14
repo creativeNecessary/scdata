@@ -26,7 +26,8 @@ class ResponseHelper
 
     private static function handleData($data){
         if(is_array($data)){
-           return  "{" . json_encode($data) . "}";
+            $json_str = "{" . json_encode($data) . "}";
+           return json_decode($json_str) ;
         }
         return $data;
     }
