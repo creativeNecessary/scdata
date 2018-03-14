@@ -15,6 +15,9 @@ class ResponseHelper
     public static function json($data, $msg, $status, $code)
     {
 
+        if(is_array($data)){
+            $data = array($data);
+        }
         $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data), true);
 
         return $response;
