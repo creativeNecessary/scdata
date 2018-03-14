@@ -18,9 +18,9 @@ class ResponseHelper
     {
 
         if (is_array($data)) {
-
+            $data = json_decode(json_encode($data,JSON_FORCE_OBJECT));
         }
-        $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data), true);
+        $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data));
 
         return $response;
     }
