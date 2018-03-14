@@ -9,7 +9,7 @@
 namespace App\Http\Helpers;
 
 
-use function PHPSTORM_META\map;
+use stdClass;
 
 class ResponseHelper
 {
@@ -18,7 +18,8 @@ class ResponseHelper
     {
 
         if (is_array($data)) {
-            $data = array(null => $data);
+
+            $data = new stdClass($data);
         }
         $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data), true);
 
