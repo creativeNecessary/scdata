@@ -19,7 +19,6 @@ class ResponseHelper
 
         if (is_array($data)) {
 
-            $data = new stdClass($data);
         }
         $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data), true);
 
