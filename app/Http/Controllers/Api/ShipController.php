@@ -26,10 +26,10 @@ class ShipController extends Controller
         $input=$request->only(['ship_id']);
         $ship_id = $input['ship_id'];
         $ships = DB::select('select * from ship_en WHERE id = ?',[$ship_id]);
-//        $ship = json_decode(json_encode($ship));
+        $ships = json_decode(json_encode($ships));
 //        $ship_urls = DB::select('select url from ship_url WHERE ship_id = ? AND type = ?',[$ship_id,'image']);
 //        $ship_urls = json_decode(json_encode($ship_urls));
-//        $ship = $ships[0];
-        return gettype($ships);
+        $ship = $ships[0];
+        return gettype($ship);
     }
 }
