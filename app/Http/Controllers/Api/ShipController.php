@@ -28,6 +28,6 @@ class ShipController extends Controller
         $ship = DB::select('select * from ship_en WHERE id = ?',[$ship_id]);
         $ship = json_decode(json_encode($ship));
 
-        return $ship_id;
+        return $ship;
     }
 }
