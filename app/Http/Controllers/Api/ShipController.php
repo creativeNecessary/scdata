@@ -24,7 +24,10 @@ class ShipController extends Controller
     //
     public function getShipDetail(Request $request){
         $input=$request->only(['ship_id']);
+        $ship_id = $input['ship_id'];
+        $ship = DB::select('select * from ship_en WHERE id = ?',[$ship_id]);
+        $ship = json_decode(json_encode($ship));
 
-        return resource_path();
+        return $this->onSuccess($ship);
     }
 }
