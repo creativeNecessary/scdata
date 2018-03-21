@@ -17,12 +17,6 @@ class ShipController extends Controller
         $start = $page_num * $per_page;
         $ships = DB::select('select name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?',[$start,$per_page]);
         $ships = json_decode(json_encode($ships));
-//        foreach ($ships as &$ship){
-//            $pic_url = $ship['pic_url'];
-//            $pic_urls = DB::select('select * from ship_url WHERE ship_id = ?',[$pic_url]);
-//            $ship['pic_url'] = $pic_urls;
-//        }
-//        unset($ship);
         return $this->onSuccess($ships);
     }
 }
