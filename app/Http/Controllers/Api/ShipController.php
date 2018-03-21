@@ -20,4 +20,11 @@ class ShipController extends Controller
 
         return $this->onSuccess($ships);
     }
+
+    //
+    public function getShipDetail(Request $request){
+        $input=$request->only(['ship_id']);
+
+        return resource_path();
+    }
 }

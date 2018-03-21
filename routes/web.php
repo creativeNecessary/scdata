@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 
 Route::post('api/getShipList', 'ShipController@getShipList');
+Route::post('api/getShipDetail', 'ShipController@getShipDetail');
