@@ -28,8 +28,7 @@ class ShipController extends Controller
         $ships = DB::select('select * from ship_en WHERE id = ?',[$ship_id]);
 //        $ship_urls = DB::select('select url from ship_url WHERE ship_id = ? AND type = ?',[$ship_id,'image']);
 //        $ship_urls = json_decode(json_encode($ship_urls));
-        $ship = $ships[0];
 
-        return $ship;
+        return $ships;
     }
 }
