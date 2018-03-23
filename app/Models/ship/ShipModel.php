@@ -35,7 +35,7 @@ class ShipModel extends Model
 
     public function setManufacturer($manufacturer)
     {
-        $this->attributes['manufacturer'] = $manufacturer;
+        $this->attributes['manufacturer'] = $manufacturer[0];
     }
 
 }
