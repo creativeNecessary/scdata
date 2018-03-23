@@ -27,4 +27,9 @@ class ShipModel extends Model
 
     }
 
+    public function setImageUrl($urls)
+    {
+        $this->attributes['pic_url'] = strtolower($urls);
+    }
+
 }
