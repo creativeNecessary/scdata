@@ -8,15 +8,16 @@
 
 namespace App\Models\ship;
 
+use App\Models\Model;
 
 class ShipUrl extends Model
 {
     protected $table = "ship_url";
     public $timestamps = false;
 
-    public function ship_url()
-    {
-        return $this->hasOne('App\Models\ship\ShipUrl');
-    }
+//    public function ship_url()
+//    {
+//        return $this->hasOne('App\Models\ship\ShipUrl');
+//    }
 
 }
