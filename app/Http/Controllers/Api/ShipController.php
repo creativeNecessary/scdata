@@ -32,6 +32,6 @@ class ShipController extends Controller
 //        $ship_urls = json_decode(json_encode($ship_urls));
         $ship = ShipModel::find(1);
 
-        return gettype($ship);
+        return $ship;
     }
 }
