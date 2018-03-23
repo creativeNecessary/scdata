@@ -30,8 +30,8 @@ class ShipModel extends Model
 
     public function setImageUrl($urls)
     {
-        $pic_url = json_decode(json_encode($urls));
-        $this->attributes['pic_url'] = $pic_url;
+//        $pic_url = json_decode(json_encode($urls));
+        $this->attributes['pic_url'] = $urls;
     }
 
 }
