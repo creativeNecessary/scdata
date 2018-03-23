@@ -13,3 +13,5 @@ yarn-error.log
 .env
 database.php
 /resources/media
+composer.json
+composer.lock
