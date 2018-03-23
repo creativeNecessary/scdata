@@ -9,11 +9,23 @@
 namespace App\Models\ship;
 
 use App\Models\Model;
+use Illuminate\Database\Eloquent\Builder ;
+
 
 class ShipModel extends Model
 {
+
     protected $table = "ship_en";
+    public $timestamps = false;
 
 
+    public function ship()
+    {
+        return $this->hasOne('App\Models\ship\ShipModel');
+    }
+
+    public function getShip($id){
+
+    }
 
 }
