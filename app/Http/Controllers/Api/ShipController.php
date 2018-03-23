@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Model;
+use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipModel;
 use App\Models\ship\ShipUrl;
 use Illuminate\Http\Request;
@@ -33,8 +34,8 @@ class ShipController extends Controller
 //        $ship_urls = json_decode(json_encode($ship_urls));
         $ship = ShipModel::find($ship_id);
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
-
+        $ship_manu = ManufacturerModel::where('id',$ship->manufacturer_id)->get();
         $ship->setImageUrl($ship_url);
-        return $ship;
+        return $ship_manu;
     }
 }
