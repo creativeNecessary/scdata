@@ -34,9 +34,9 @@ class ShipController extends Controller
 //        $ship_urls = json_decode(json_encode($ship_urls));
         $ship = ShipModel::find($ship_id);
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
-//        $manufacturer = ManufacturerModel::where('id',$ship->manufacturer_id)->get();
+        $manufacturer = ManufacturerModel::where('id',$ship->manufacturer)->get();
         $ship->setImageUrl($ship_url);
-//        $ship->setManufacturer($manufacturer);
+        $ship->setManufacturer($manufacturer);
         return $ship;
     }
 }
