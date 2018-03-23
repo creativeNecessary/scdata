@@ -33,4 +33,9 @@ class ShipModel extends Model
         $this->attributes['pic_url'] = $urls;
     }
 
+    public function setManufacturer($manufacturer)
+    {
+        $this->attributes['manufacturer'] = $manufacturer;
+    }
+
 }
