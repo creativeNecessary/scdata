@@ -35,6 +35,6 @@ class ShipController extends Controller
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
 
         $ship->setImageUrl($ship_url);
-        return $ship->pic_url;
+        return $ship;
     }
 }
