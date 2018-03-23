@@ -9,7 +9,6 @@
 namespace App\Models\ship;
 
 use App\Models\Model;
-use Illuminate\Database\Eloquent\Builder ;
 
 
 class ShipModel extends Model

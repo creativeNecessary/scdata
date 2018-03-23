@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Model;
 use App\Models\ship\ShipModel;
+use App\Models\ship\ShipUrl;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,8 @@ class ShipController extends Controller
 //        $ship_urls = DB::select('select url from ship_url WHERE ship_id = ? AND type = ?',[$ship_id,'image']);
 //        $ship_urls = json_decode(json_encode($ship_urls));
         $ship = ShipModel::find($ship_id);
+        $ship_url = ShipUrl::where([['ship_id',$ship_id],['type','image']])->get();
 
-        return $ship->name;
+        return $ship_url;
     }
 }
