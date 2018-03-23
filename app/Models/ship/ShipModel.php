@@ -23,13 +23,15 @@ class ShipModel extends Model
         return $this->hasOne('App\Models\ship\ShipModel');
     }
 
-    public function getShip($id){
+    public function getShip($id)
+    {
 
     }
 
     public function setImageUrl($urls)
     {
-        $this->attributes['pic_url'] = strtolower($urls);
+        $pic_url = json_decode(json_encode($urls));
+        $this->attributes['pic_url'] = $pic_url;
     }
 
 }
