@@ -59,7 +59,7 @@ class ShipController extends Controller
 //        $ship->setShipEquipment('thrusters',$thrusters);
 //        $ship->setShipEquipment('weapons',$weapons);
 
-        return $ship;
+        return $this->onSuccess($ship);
 
     }
 
