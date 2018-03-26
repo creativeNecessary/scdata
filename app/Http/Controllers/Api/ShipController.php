@@ -65,8 +65,8 @@ class ShipController extends Controller
 
     private function initShipEquipment($ship,$ship_id,$ship_field,$tag){
         $ship_equipments =  ShipEquipment::where([['ship_id',$ship_id],['tag',$tag]])->get();
-        foreach ($ship_equipments as $ship_equipment => $value){
-            $equipment_id =  $value->equipment_id;
+        foreach ($ship_equipments as $ship_equipment){
+            $equipment_id =  $ship_equipment->equipment;
             $equipment = Equipment::find($equipment_id);
             if($equipment != null){
                 $ship_equipments[$ship_equipment]->setEquipment($equipment);
