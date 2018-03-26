@@ -70,6 +70,9 @@ class ShipController extends Controller
             $equipment = Equipment::find($equipment_id);
             if($equipment != null){
                 $ship_equipments[$ship_equipment]->setEquipment($equipment);
+            }else{
+                $obj = new stdClass();
+                $ship_equipments[$ship_equipment]->setEquipment($obj);
             }
         }
         $ship->setShipEquipment($ship_field,$ship_equipments);
