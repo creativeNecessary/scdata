@@ -11,6 +11,7 @@ use App\Models\ship\ShipUrl;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class ShipController extends Controller
 {
