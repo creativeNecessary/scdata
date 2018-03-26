@@ -38,7 +38,7 @@ class ShipController extends Controller
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
         $manufacturer = ManufacturerModel::where('id',$ship->manufacturer)->get();
 
-//        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
+        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
 //        $modular = ShipEquipment::where([['ship_id',$ship_id],['tag','modular']])->get();
 //        $propulsion = ShipEquipment::where([['ship_id',$ship_id],['tag','propulsion']])->get();
 //        $thrusters = ShipEquipment::where([['ship_id',$ship_id],['tag','thruster']])->get();
@@ -58,9 +58,8 @@ class ShipController extends Controller
 //        $ship->setShipEquipment('propulsion',$propulsion);
 //        $ship->setShipEquipment('thrusters',$thrusters);
 //        $ship->setShipEquipment('weapons',$weapons);
-        $equipment = Equipment::find('1');
 
-        return $equipment;
+        return $ship;
 
     }
 

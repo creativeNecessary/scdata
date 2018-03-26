@@ -16,6 +16,6 @@ class ShipEquipment extends Model
 
     public function setEquipment($equipment)
     {
-        $this->attributes['$equipment'] = $equipment;
+        $this->attributes['equipment'] = $equipment;
     }
 }
