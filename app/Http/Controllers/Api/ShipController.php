@@ -69,7 +69,7 @@ class ShipController extends Controller
             $equipment_id =  $value->equipment_id;
             $equipment = Equipment::find($equipment_id);
             if($equipment != null){
-                $value->setEquipment($equipment);
+                $ship_equipments[$ship_equipment]->setEquipment($equipment);
             }
         }
         $ship->setShipEquipment($ship_field,$ship_equipments);
