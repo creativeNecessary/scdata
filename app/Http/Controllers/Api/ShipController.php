@@ -58,8 +58,9 @@ class ShipController extends Controller
 //        $ship->setShipEquipment('propulsion',$propulsion);
 //        $ship->setShipEquipment('thrusters',$thrusters);
 //        $ship->setShipEquipment('weapons',$weapons);
+        $equipment = Equipment::find('1');
 
-        return $ship;
+        return $equipment;
 
     }
 
@@ -73,7 +74,6 @@ class ShipController extends Controller
             }
         }
         $ship->setShipEquipment($ship_field,$ship_equipments);
-
     }
 
 }
