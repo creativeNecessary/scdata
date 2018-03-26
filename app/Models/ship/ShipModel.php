@@ -33,6 +33,11 @@ class ShipModel extends Model
         $this->attributes['pic_url'] = $urls;
     }
 
+    public function setShipEquipment($field_name,$ship_equipments)
+    {
+        $this->attributes[$field_name] = $ship_equipments;
+    }
+
     public function setManufacturer($manufacturer)
     {
         $this->attributes['manufacturer'] = $manufacturer[0];

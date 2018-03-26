@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Model;
 use App\Models\ship\ManufacturerModel;
+use App\Models\ship\ShipEquipment;
 use App\Models\ship\ShipModel;
 use App\Models\ship\ShipUrl;
 use Illuminate\Http\Request;
@@ -35,8 +36,21 @@ class ShipController extends Controller
         $ship = ShipModel::find($ship_id);
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
         $manufacturer = ManufacturerModel::where('id',$ship->manufacturer)->get();
+        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
+        $modular = ShipEquipment::where([['ship_id',$ship_id],['tag','modular']])->get();
+        $propulsion = ShipEquipment::where([['ship_id',$ship_id],['tag','propulsion']])->get();
+        $thrusters = ShipEquipment::where([['ship_id',$ship_id],['tag','thruster']])->get();
+        $weapons = ShipEquipment::where([['ship_id',$ship_id],['tag','weapon']])->get();
+
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
+        $ship->setShipEquipment('avionics',$avionics);
+        $ship->setShipEquipment('modular',$modular);
+        $ship->setShipEquipment('propulsion',$propulsion);
+        $ship->setShipEquipment('thrusters',$thrusters);
+        $ship->setShipEquipment('weapons',$weapons);
+
         return $ship;
+
     }
 }
