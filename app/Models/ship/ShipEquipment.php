@@ -13,4 +13,9 @@ class ShipEquipment extends Model
 {
     protected $table = "ship_equipment_en";
     public $timestamps = false;
+
+    public function setEquipment($equipment)
+    {
+        $this->attributes['$equipment'] = $equipment;
+    }
 }

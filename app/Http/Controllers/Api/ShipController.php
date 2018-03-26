@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Model;
+use App\Models\ship\Equipment;
 use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipEquipment;
 use App\Models\ship\ShipModel;
@@ -36,21 +37,43 @@ class ShipController extends Controller
         $ship = ShipModel::find($ship_id);
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
         $manufacturer = ManufacturerModel::where('id',$ship->manufacturer)->get();
-        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
-        $modular = ShipEquipment::where([['ship_id',$ship_id],['tag','modular']])->get();
-        $propulsion = ShipEquipment::where([['ship_id',$ship_id],['tag','propulsion']])->get();
-        $thrusters = ShipEquipment::where([['ship_id',$ship_id],['tag','thruster']])->get();
-        $weapons = ShipEquipment::where([['ship_id',$ship_id],['tag','weapon']])->get();
+
+//        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
+//        $modular = ShipEquipment::where([['ship_id',$ship_id],['tag','modular']])->get();
+//        $propulsion = ShipEquipment::where([['ship_id',$ship_id],['tag','propulsion']])->get();
+//        $thrusters = ShipEquipment::where([['ship_id',$ship_id],['tag','thruster']])->get();
+//        $weapons = ShipEquipment::where([['ship_id',$ship_id],['tag','weapon']])->get();
 
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
-        $ship->setShipEquipment('avionics',$avionics);
-        $ship->setShipEquipment('modular',$modular);
-        $ship->setShipEquipment('propulsion',$propulsion);
-        $ship->setShipEquipment('thrusters',$thrusters);
-        $ship->setShipEquipment('weapons',$weapons);
+
+        $this->initShipEquipment($ship,$ship_id,'avionics','avionic');
+        $this->initShipEquipment($ship,$ship_id,'modular','modular');
+        $this->initShipEquipment($ship,$ship_id,'propulsion','propulsion');
+        $this->initShipEquipment($ship,$ship_id,'thrusters','thruster');
+        $this->initShipEquipment($ship,$ship_id,'weapons','weapon');
+
+//        $ship->setShipEquipment('avionics',$avionics);
+//        $ship->setShipEquipment('modular',$modular);
+//        $ship->setShipEquipment('propulsion',$propulsion);
+//        $ship->setShipEquipment('thrusters',$thrusters);
+//        $ship->setShipEquipment('weapons',$weapons);
 
         return $ship;
 
     }
+
+    private function initShipEquipment($ship,$ship_id,$ship_field,$tag){
+        $ship_equipments =  ShipEquipment::where([['ship_id',$ship_id],['tag',$tag]])->get();
+        foreach ($ship_equipments as $ship_equipment => $value){
+            $equipment_id =  $value->equipment_id;
+            $equipment = Equipment::find($equipment_id);
+            if($equipment != null){
+                $value->setEquipment($equipment);
+            }
+        }
+        $ship->setShipEquipment($ship_field,$ship_equipments);
+
+    }
+
 }
