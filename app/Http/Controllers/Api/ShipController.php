@@ -66,4 +66,11 @@ class ShipController extends Controller
         $ship->setShipEquipment($ship_field,$ship_equipments);
     }
 
+
+    public function getImageFile($filename){
+        $path = resource_path('media/ctmfiles/Eclipse3.stl');
+
+        return $path;
+    }
+
 }

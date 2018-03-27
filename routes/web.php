@@ -18,7 +18,4 @@ Route::get('/', function () {
 
 Route::post('api/getShipList', 'ShipController@getShipList');
 Route::post('api/getShipDetail', 'ShipController@getShipDetail');
-Route::get('api/image/{filename}', function ($filename){
-
-    return $filename;
-});
+Route::get('api/image/{filename}', 'ShipController@getImageFile');
