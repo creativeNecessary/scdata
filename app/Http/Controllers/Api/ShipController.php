@@ -32,18 +32,10 @@ class ShipController extends Controller
     public function getShipDetail(Request $request){
         $input=$request->only(['ship_id']);
         $ship_id = $input['ship_id'];
-//        $ships = DB::select('select * from ship_en WHERE id = ?',[$ship_id]);
-//        $ship_urls = DB::select('select url from ship_url WHERE ship_id = ? AND type = ?',[$ship_id,'image']);
-//        $ship_urls = json_decode(json_encode($ship_urls));
         $ship = ShipModel::find($ship_id);
         $ship_url = ShipUrl::select('url')->where([['ship_id',$ship_id],['type','image']])->get();
         $manufacturer = ManufacturerModel::where('id',$ship->manufacturer)->get();
 
-//        $avionics = ShipEquipment::where([['ship_id',$ship_id],['tag','avionic']])->get();
-//        $modular = ShipEquipment::where([['ship_id',$ship_id],['tag','modular']])->get();
-//        $propulsion = ShipEquipment::where([['ship_id',$ship_id],['tag','propulsion']])->get();
-//        $thrusters = ShipEquipment::where([['ship_id',$ship_id],['tag','thruster']])->get();
-//        $weapons = ShipEquipment::where([['ship_id',$ship_id],['tag','weapon']])->get();
 
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
@@ -54,11 +46,6 @@ class ShipController extends Controller
         $this->initShipEquipment($ship,$ship_id,'thrusters','thruster');
         $this->initShipEquipment($ship,$ship_id,'weapons','weapon');
 
-//        $ship->setShipEquipment('avionics',$avionics);
-//        $ship->setShipEquipment('modular',$modular);
-//        $ship->setShipEquipment('propulsion',$propulsion);
-//        $ship->setShipEquipment('thrusters',$thrusters);
-//        $ship->setShipEquipment('weapons',$weapons);
 
         return $this->onSuccess($ship);
 
