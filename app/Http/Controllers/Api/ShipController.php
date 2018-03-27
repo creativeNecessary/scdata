@@ -8,8 +8,10 @@ use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipEquipment;
 use App\Models\ship\ShipModel;
 use App\Models\ship\ShipUrl;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 
@@ -68,9 +70,13 @@ class ShipController extends Controller
 
 
     public function getImageFile($filename){
-        $path = resource_path('media/ctmfiles/Eclipse3.stl');
 
-        return $path;
+        $path = resource_path('media/ctmfiles/Eclipse3.stl');
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($path,$filename,$headers);
     }
 
 }
