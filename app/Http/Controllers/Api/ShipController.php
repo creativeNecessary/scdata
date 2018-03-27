@@ -73,7 +73,7 @@ class ShipController extends Controller
 
         $path = resource_path('media/ctmfiles/Eclipse3.stl');
         $headers = [
-            'Content-Type' => 'application/pdf',
+            'Content-Type' => 'application/vnd.ms-pki.stl',
         ];
 
         return response()->download($path,$filename,$headers);
