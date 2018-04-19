@@ -9,7 +9,6 @@
 namespace App\Http\Helpers;
 
 use Symfony\Component\HttpFoundation\Response as FoundationResponse;
-use App\Http\Helpers\ResponseHelper;
 
 trait ResponseApi
 {

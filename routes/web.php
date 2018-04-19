@@ -18,4 +18,5 @@ Route::get('/', function () {
 
 Route::post('api/getShipList', 'ShipController@getShipList');
 Route::post('api/getShipDetail', 'ShipController@getShipDetail');
+Route::get('api/stlmodel/{filename}', 'ShipController@getSTLFile');
 Route::get('api/image/{filename}', 'ShipController@getImageFile');

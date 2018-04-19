@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\DigitalSignatureHelper;
 use App\Http\Helpers\ResponseApi;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests,ResponseApi;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests,ResponseApi,DigitalSignatureHelper;
 }

@@ -47,8 +47,6 @@ class ShipController extends Controller
         $this->initShipEquipment($ship,$ship_id,'propulsion','propulsion');
         $this->initShipEquipment($ship,$ship_id,'thrusters','thruster');
         $this->initShipEquipment($ship,$ship_id,'weapons','weapon');
-
-
         return $this->onSuccess($ship);
 
     }
@@ -69,11 +67,21 @@ class ShipController extends Controller
     }
 
 
-    public function getImageFile($filename){
+    public function getSTLFile($filename){
 
-        $path = resource_path('media/ctmfiles/Eclipse3.stl');
+        $path = resource_path('media/ctmfiles/'.$filename);
         $headers = [
             'Content-Type' => 'application/vnd.ms-pki.stl',
+        ];
+
+        return response()->download($path,$filename,$headers);
+    }
+
+    public function getImageFile($filename){
+
+        $path = resource_path('media/image/'.$filename);
+        $headers = [
+            'Content-Type' => 'image/png',
         ];
 
         return response()->download($path,$filename,$headers);
