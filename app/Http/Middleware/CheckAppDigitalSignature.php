@@ -16,12 +16,11 @@ class CheckAppDigitalSignature
      */
     public function handle($request, Closure $next)
     {
-        $test = $this->checkSignature($request);
 
-//        return response('Unauthorized.', 401);
-        return response($test);
-
-//        return $next($request);
+        if(!$this->checkSignature($request)){
+            return response('Unauthorized.', 401);
+        }
+        return $next($request);
     }
 
     private function checkSignature(Request $request)
@@ -32,7 +31,7 @@ class CheckAppDigitalSignature
         $digital_signature = $input['digital_signature'];
 
         if ($timestamp == null || $action == null || $digital_signature == null) {
-            return "1111";
+            return false;
         }
         $action_length = strlen($action);
         $timestamp_length = strlen($timestamp);
@@ -43,7 +42,7 @@ class CheckAppDigitalSignature
             $cycle_index = $action_length * 2;
         }
         if ($cycle_index == 0) {
-            return "22222";
+            return false;
         }
         $index_action = 0;
         $index_timestamp = 0;
@@ -71,15 +70,15 @@ class CheckAppDigitalSignature
                 }
             }
         }
-        if(implode("",$result_char) == null){
-            return "";
+        if (implode("", $result_char) == null) {
+            return false;
         }
-        $data = implode("",$result_char);
+        $data = implode("", $result_char);
         $result_char = sha1($data);
         if (strcmp($digital_signature, $result_char) != 0) {
-            return  $digital_signature."-----".$result_char;
+            return $digital_signature . "-----" . $result_char;
         }
 
-        return $result_char;
+        return true;
     }
 }
