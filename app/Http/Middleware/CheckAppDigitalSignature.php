@@ -76,7 +76,7 @@ class CheckAppDigitalSignature
         $data = implode("", $result_char);
         $result_char = sha1($data);
         if (strcmp($digital_signature, $result_char) != 0) {
-            return $digital_signature . "-----" . $result_char;
+            return false;
         }
 
         return true;
