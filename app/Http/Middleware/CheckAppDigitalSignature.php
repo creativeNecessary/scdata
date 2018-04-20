@@ -32,7 +32,7 @@ class CheckAppDigitalSignature
         $digital_signature = $input['digital_signature'];
 
         if ($timestamp == null || $action == null || $digital_signature == null) {
-            return "";
+            return "1111";
         }
         $action_length = strlen($action);
         $timestamp_length = strlen($timestamp);
@@ -43,7 +43,7 @@ class CheckAppDigitalSignature
             $cycle_index = $action_length * 2;
         }
         if ($cycle_index == 0) {
-            return "";
+            return "22222";
         }
         $index_action = 0;
         $index_timestamp = 0;
@@ -72,7 +72,7 @@ class CheckAppDigitalSignature
             }
         }
         if (strcmp($digital_signature, implode("",$result_char)) != 0) {
-            return "";
+            return "33333";
         }
 
         return $result_char;
