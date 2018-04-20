@@ -71,8 +71,13 @@ class CheckAppDigitalSignature
                 }
             }
         }
-        if (strcmp($digital_signature, implode("",$result_char)) != 0) {
-            return  $digital_signature."-----".implode("",$result_char);
+        if(implode("",$result_char) == null){
+            return "";
+        }
+        $data = implode("",$result_char);
+        $result_char = sha1($data);
+        if (strcmp($digital_signature, $result_char) != 0) {
+            return  $digital_signature."-----".$result_char;
         }
 
         return $result_char;
