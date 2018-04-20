@@ -33,6 +33,13 @@ class CheckAppDigitalSignature
         if ($timestamp == null || $action == null || $digital_signature == null) {
             return false;
         }
+        $now_time = microtime(true)*1000;
+
+        if(($now_time - $timestamp)/1000 >=120){
+
+            return false;
+        }
+
         $action_length = strlen($action);
         $timestamp_length = strlen($timestamp);
         $cycle_index = 0;
