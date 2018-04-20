@@ -56,7 +56,7 @@ class CheckAppDigitalSignature
                     $index_action++;
                 } else {
                     $result_char[$i] = $timestamp[$index_timestamp];
-                    $index_action++;
+                    $index_timestamp++;
                 }
             }
 
@@ -64,7 +64,7 @@ class CheckAppDigitalSignature
             for ($i = 0; $i < $cycle_index; $i++) {
                 if ($i % 2 == 0) {
                     $result_char[$i] = $timestamp[$index_timestamp];
-                    $index_action++;
+                    $index_timestamp++;
                 } else {
                     $result_char[$i] = $action[$index_action];
                     $index_action++;
