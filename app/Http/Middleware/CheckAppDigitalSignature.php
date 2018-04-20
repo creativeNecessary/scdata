@@ -31,7 +31,7 @@ class CheckAppDigitalSignature
         $action = $input['action'];
         $digital_signature = $input['digital_signature'];
 
-        if ($timestamp == nullOrEmptyString() || $action == nullOrEmptyString() || $digital_signature == nullOrEmptyString()) {
+        if ($timestamp == null || $action == null || $digital_signature == null) {
             return "";
         }
         $action_length = strlen($action);
