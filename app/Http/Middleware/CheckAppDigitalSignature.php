@@ -72,7 +72,7 @@ class CheckAppDigitalSignature
             }
         }
         if (strcmp($digital_signature, implode("",$result_char)) != 0) {
-            return "33333";
+            return  $digital_signature."-----".implode("",$result_char);
         }
 
         return $result_char;
