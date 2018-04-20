@@ -71,7 +71,7 @@ class CheckAppDigitalSignature
                 }
             }
         }
-        if (strcmp($digital_signature, $result_char) != 0) {
+        if (strcmp($digital_signature, implode("",$result_char)) != 0) {
             return "";
         }
 
