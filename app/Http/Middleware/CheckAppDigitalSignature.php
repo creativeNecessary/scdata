@@ -47,7 +47,7 @@ class CheckAppDigitalSignature
         }
         $index_action = 0;
         $index_timestamp = 0;
-        $result_char = "";
+        $result_char = [];
         if (intval($timestamp[$timestamp_length - 1]) % 2 == 0) {
 
             for ($i = 0; $i < $cycle_index; $i++) {
