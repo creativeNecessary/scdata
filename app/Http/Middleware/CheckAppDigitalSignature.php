@@ -19,7 +19,7 @@ class CheckAppDigitalSignature
         $test = $this->checkSignature($request);
 
 //        return response('Unauthorized.', 401);
-        return response($test, 401);
+        return response($test);
 
 //        return $next($request);
     }
