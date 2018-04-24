@@ -15,7 +15,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use stdClass;
-use Illuminate\Support\Facades\Storage;
 
 class ShipController extends Controller
 {
@@ -84,6 +83,7 @@ class ShipController extends Controller
         $sub_file_name = substr($end_str,1,strlen($end_str)-5);
         $filename = $sub_file_name.'.stl';
 
+
         $path = resource_path('media/ctmfiles/'.$filename);
         if($path == null){
             return $this->onFailure(ResponseApi::$SERVICE_ERROR);
@@ -91,7 +91,9 @@ class ShipController extends Controller
         if(strlen($path) <= 0){
             return $this->onFailure(ResponseApi::$SERVICE_ERROR);
         }
-        $size = Storage::size($path);
+//        $size = Storage::size($path);
+        $size = File::size($path);
+
         $headers = [
             'Content-Type' => 'application/vnd.ms-pki.stl',
         ];
