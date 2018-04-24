@@ -74,7 +74,7 @@ class ShipController extends Controller
 
 
         $filename = ShipModel::where('id',$ship_id)->value('model3d_url');
-        $name_start_index = strrchr($filename,'/');
+        $name_start_index = strrpos($filename,'/');
 
 //        $sub_file_name = substr($filename,$name_start_index,strlen($filename)-$name_start_index);
 
