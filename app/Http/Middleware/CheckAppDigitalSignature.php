@@ -17,9 +17,9 @@ class CheckAppDigitalSignature
     public function handle($request, Closure $next)
     {
 
-        if(!$this->checkSignature($request)){
-            return response('Unauthorized.', 401);
-        }
+//        if(!$this->checkSignature($request)){
+//            return response('Unauthorized.', 401);
+//        }
         return $next($request);
     }
 

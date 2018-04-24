@@ -67,14 +67,25 @@ class ShipController extends Controller
     }
 
 
-    public function getSTLFile($filename){
+    public function getSTLFile(Request $request){
+        $input=$request->only(['ship_id']);
+        $ship_id = $input['ship_id'];
+        //获取飞船id从数据库查询
 
-        $path = resource_path('media/ctmfiles/'.$filename);
-        $headers = [
-            'Content-Type' => 'application/vnd.ms-pki.stl',
-        ];
 
-        return response()->download($path,$filename,$headers);
+        $filename = ShipModel::where('ship_id',$ship_id)->value('model3d_url');
+        $name_start_index = strrchr($filename,'/');
+
+        $sub_file_name = substr($filename,$name_start_index,strlen($filename)-$name_start_index);
+
+
+//        $path = resource_path('media/ctmfiles/'.$filename);
+//        $headers = [
+//            'Content-Type' => 'application/vnd.ms-pki.stl',
+//        ];
+
+//        return response()->download($path,$filename,$headers);
+        return $this->onSuccess($sub_file_name);
     }
 
     public function getImageFile($filename){
