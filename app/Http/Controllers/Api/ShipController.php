@@ -76,7 +76,8 @@ class ShipController extends Controller
         $filename = ShipModel::where('id',$ship_id)->value('model3d_url');
         $name_start_index = strrpos($filename,'/');
 
-//        $sub_file_name = substr($filename,$name_start_index,strlen($filename)-$name_start_index);
+
+        $sub_file_name = substr($filename,$name_start_index,strlen($filename)-$name_start_index);
 
 
 //        $path = resource_path('media/ctmfiles/'.$filename);
@@ -85,7 +86,7 @@ class ShipController extends Controller
 //        ];
 
 //        return response()->download($path,$filename,$headers);
-        return $this->onSuccess($name_start_index);
+        return $this->onSuccess($sub_file_name);
     }
 
     public function getImageFile($filename){
