@@ -91,8 +91,7 @@ class ShipController extends Controller
         if(strlen($path) <= 0){
             return $this->onFailure(ResponseApi::$SERVICE_ERROR);
         }
-//        $size = Storage::size($path);
-        $size = File::size($path);
+        $size = filesize($path);
 
         $headers = [
             'Content-Type' => 'application/vnd.ms-pki.stl',
