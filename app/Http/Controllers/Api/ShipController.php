@@ -73,7 +73,7 @@ class ShipController extends Controller
         //获取飞船id从数据库查询
 
 
-        $filename = ShipModel::where('ship_id',$ship_id)->value('model3d_url');
+        $filename = ShipModel::where('id',$ship_id)->value('model3d_url');
         $name_start_index = strrchr($filename,'/');
 
         $sub_file_name = substr($filename,$name_start_index,strlen($filename)-$name_start_index);
