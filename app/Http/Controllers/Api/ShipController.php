@@ -100,8 +100,9 @@ class ShipController extends Controller
         $headers = [
             'Content-Type' => 'application/vnd.ms-pki.stl',
             'Content-Length' => $size,
+            'ScFileName' => $filename
         ];
-        return response()->download($path,$filename,$headers);
+        return response()->download($path, $filename, $headers);
     }
 
     public function getImageFile($filename)
