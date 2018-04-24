@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Helpers\ResponseApi;
 use App\Models\Model;
 use App\Models\ship\Equipment;
 use App\Models\ship\ManufacturerModel;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use stdClass;
+use Illuminate\Support\Facades\Storage;
 
 class ShipController extends Controller
 {
@@ -73,19 +75,28 @@ class ShipController extends Controller
         //获取飞船id从数据库查询
 
 
-        $filename = ShipModel::where('id',$ship_id)->value('model3d_url');
-        $end_str = strrchr($filename,'/');
+        $model_path = ShipModel::where('id',$ship_id)->value('model3d_url');
+        $end_str = strrchr($model_path,'/');
 
+        if(strlen($end_str) <= 5){
+            return $this->onFailure(ResponseApi::$SERVICE_ERROR);
+        }
         $sub_file_name = substr($end_str,1,strlen($end_str)-5);
+        $filename = $sub_file_name.'.stl';
 
-
-//        $path = resource_path('media/ctmfiles/'.$filename);
-//        $headers = [
-//            'Content-Type' => 'application/vnd.ms-pki.stl',
-//        ];
-
+        $path = resource_path('media/ctmfiles/'.$filename);
+        if($path == null){
+            return $this->onFailure(ResponseApi::$SERVICE_ERROR);
+        }
+        if(strlen($path) <= 0){
+            return $this->onFailure(ResponseApi::$SERVICE_ERROR);
+        }
+        $size = Storage::size($path);
+        $headers = [
+            'Content-Type' => 'application/vnd.ms-pki.stl',
+        ];
+        return $this->onSuccess($size);
 //        return response()->download($path,$filename,$headers);
-        return $this->onSuccess($sub_file_name);
     }
 
     public function getImageFile($filename){

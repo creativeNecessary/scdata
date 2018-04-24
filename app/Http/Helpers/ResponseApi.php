@@ -14,7 +14,7 @@ trait ResponseApi
 {
     protected $statusCode = FoundationResponse::HTTP_OK;
 
-
+    public static $SERVICE_ERROR = 'Service has a unknown error';
     /**
      * @return int
      */
@@ -32,6 +32,11 @@ trait ResponseApi
     }
 
     public function onSuccess($data, $message = "success", $status = "allow")
+    {
+        $this->setStatusCode(FoundationResponse::HTTP_OK);
+        return ResponseHelper::json($data, $message, $status, $this->getStatusCode());
+    }
+    public function onFailure($data, $message = "failure", $status = "allow")
     {
         $this->setStatusCode(FoundationResponse::HTTP_OK);
         return ResponseHelper::json($data, $message, $status, $this->getStatusCode());
