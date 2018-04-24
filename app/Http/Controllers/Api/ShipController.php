@@ -76,7 +76,7 @@ class ShipController extends Controller
         $filename = ShipModel::where('id',$ship_id)->value('model3d_url');
         $end_str = strrchr($filename,'/');
 
-        $sub_file_name = substr($end_str,1,strlen($end_str)-4);
+        $sub_file_name = substr($end_str,1,strlen($end_str)-5);
 
 
 //        $path = resource_path('media/ctmfiles/'.$filename);
