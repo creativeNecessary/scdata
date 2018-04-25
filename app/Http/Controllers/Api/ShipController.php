@@ -95,11 +95,10 @@ class ShipController extends Controller
         if (strlen($path) <= 0) {
             return $this->onFailure(ResponseApi::$SERVICE_ERROR);
         }
-        $size = filesize($path);
+
 
         $headers = [
             'Content-Type' => 'application/vnd.ms-pki.stl',
-            'Content-Length' => $size,
             'ScFileName' => $filename
         ];
         return response()->download($path, $filename, $headers);
