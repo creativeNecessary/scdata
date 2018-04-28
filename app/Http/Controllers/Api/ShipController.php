@@ -104,12 +104,12 @@ class ShipController extends Controller
         return response()->download($path, $filename, $headers);
     }
 
-    public function getImageFile($filename)
+    public function getFuncFile($filename)
     {
 
-        $path = resource_path('media/image/' . $filename);
+        $path = resource_path('media/func/' . $filename);
         $headers = [
-            'Content-Type' => 'image/png',
+            'Content-Type' => 'application/x-zip',
         ];
 
         return response()->download($path, $filename, $headers);
