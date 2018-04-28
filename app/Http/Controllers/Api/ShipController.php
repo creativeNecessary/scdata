@@ -109,7 +109,7 @@ class ShipController extends Controller
 
         $path = resource_path('media/func/' . $filename);
         $headers = [
-            'Content-Type' => 'application/x-zip',
+            'Content-Type' => 'text/html;charset=UTF-8'
         ];
 
         return response()->download($path, $filename, $headers);
