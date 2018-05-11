@@ -26,13 +26,9 @@ class ResponseHelper
 
     private static function handleData($data)
     {
-        if (is_array($data)) {
-            $obj = new stdClass();
-            $obj->data = $data;
-
-            return $obj;
-        }
-        return $data;
+        $obj = new stdClass();
+        $obj->data = $data;
+        return $obj;
     }
 
 }
