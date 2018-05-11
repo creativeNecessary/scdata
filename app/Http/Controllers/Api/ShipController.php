@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use function PHPSTORM_META\type;
 use stdClass;
 
 class ShipController extends Controller
@@ -29,8 +30,8 @@ class ShipController extends Controller
         $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','icon','size','focus','max_crew','length']);
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
-
-        return $this->onSuccess($ships);
+        return gettype($ships);
+//        return $this->onSuccess($ships);
     }
 
     //
