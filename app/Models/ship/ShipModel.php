@@ -28,6 +28,14 @@ class ShipModel extends Model
 
     }
 
+    public function queryChName()
+    {
+        $name =  ConstantTranslate::select('translate_value')->where([['original_text',$this->attributes['name']]])->get('translate_value');
+        if(sizeof($name)>0){
+            $this->attributes['name'] = $name[0]['translate_value'];
+        }
+    }
+
     public function setName($name)
     {
         $this->attributes['name'] = $name;
