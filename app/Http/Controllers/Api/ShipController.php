@@ -30,7 +30,7 @@ class ShipController extends Controller
         $start = $page_num * $per_page;
         $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','icon','size','focus','max_crew','length']);
         foreach ($ships as &$ship){
-           $data =  ConstantTranslate::select('translate_value')->where([['original_text',$ship['name']]])->get();
+           $data =  ConstantTranslate::select('translate_value')->where([['original_text',$ship['name']]])->get('translate_value');
             $ship['name'] = $data;
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
