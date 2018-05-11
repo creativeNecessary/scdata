@@ -49,6 +49,7 @@ class ShipController extends Controller
 
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
+        $ship->queryChName();
 
         $this->initShipEquipment($ship, $ship_id, 'avionics', 'avionic');
         $this->initShipEquipment($ship, $ship_id, 'modular', 'modular');
