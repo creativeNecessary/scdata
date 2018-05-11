@@ -18,7 +18,7 @@ class ResponseHelper
     {
 
         $data = self::handleData($data);
-        $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'data' => $data));
+        $response = json_encode(array('message' => $msg, 'status' => $status, 'code' => $code, 'response_json' => $data));
 
         return $response;
     }
