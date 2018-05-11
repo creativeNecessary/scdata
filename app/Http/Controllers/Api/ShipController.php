@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Helpers\ResponseApi;
 use App\Models\Model;
+use App\Models\ship\ConstantTranslate;
 use App\Models\ship\Equipment;
 use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipEquipment;
@@ -27,10 +28,14 @@ class ShipController extends Controller
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
+        $data = "no_data";
         $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','icon','size','focus','max_crew','length']);
+        foreach ($ships as &$ship){
+           $data =  ConstantTranslate::select('translate_value')->where([['original_text',$ship['name']]])->get();
+        }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
-        return $this->onSuccess($ships);
+        return $this->onSuccess($data);
     }
 
     //

@@ -28,6 +28,10 @@ class ShipModel extends Model
 
     }
 
+    public function setName($name)
+    {
+        $this->attributes['name'] = $name;
+    }
     public function setImageUrl($urls)
     {
         $this->attributes['pic_url'] = $urls;
