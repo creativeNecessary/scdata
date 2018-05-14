@@ -59,7 +59,7 @@ class ShipController extends Controller
         $this->initShipEquipment($ship, $ship_id, 'thrusters', 'thruster');
         $this->initShipEquipment($ship, $ship_id, 'weapons', 'weapon');
 //        return $this->onSuccess($ship);
-        return type($ship_url);
+        return gettype($ship_url);
 
     }
 
