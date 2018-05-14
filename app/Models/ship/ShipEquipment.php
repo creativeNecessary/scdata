@@ -23,7 +23,9 @@ class ShipEquipment extends Model
     {
         $name =  ConstantTranslate::select('translate_value')->where([['original_text',$this->attributes['type']]])->get('translate_value');
         if(sizeof($name)>0){
-            $this->attributes['type'] = $name[0]['translate_value'];
+//            $this->attributes['type'] = $name[0]['translate_value'];
+            $this->attributes['type_ch'] = $name[0]['translate_value'];
+
         }
     }
 }
