@@ -32,7 +32,7 @@ class ShipModel extends Model
     {
         $name =  ConstantTranslate::select('translate_value')->where([['original_text',$this->attributes['name']]])->get('translate_value');
         if(sizeof($name)>0){
-            $this->attributes['name'] = $name[0]['translate_value'];
+            $this->attributes['name_ch'] = $name[0]['translate_value'];
         }
     }
 
