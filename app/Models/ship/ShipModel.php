@@ -36,6 +36,10 @@ class ShipModel extends Model
         }
     }
 
+    public function getIcon(){
+        return $this->attributes['icon'];
+    }
+
     public function setName($name)
     {
         $this->attributes['name'] = $name;

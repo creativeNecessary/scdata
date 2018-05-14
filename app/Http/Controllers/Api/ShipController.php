@@ -46,7 +46,9 @@ class ShipController extends Controller
         $ship_url = ShipUrl::select('url')->where([['ship_id', $ship_id], ['type', 'image']])->get();
         $manufacturer = ManufacturerModel::where('id', $ship->manufacturer)->get();
 
-
+        if(count($ship_url) == 0){
+            $ship_url = [$ship->getIcon()];
+        }
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
         $ship->queryChName();
