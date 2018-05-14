@@ -47,7 +47,7 @@ class ShipController extends Controller
         $manufacturer = ManufacturerModel::where('id', $ship->manufacturer)->get();
 
         if(count($ship_url) == 0){
-            $ship_url = array('url'=>$ship->getIcon());
+            $ship_url = array(array('url'=>$ship->getIcon()));
         }
         $ship->setImageUrl($ship_url);
         $ship->setManufacturer($manufacturer);
@@ -59,7 +59,7 @@ class ShipController extends Controller
         $this->initShipEquipment($ship, $ship_id, 'thrusters', 'thruster');
         $this->initShipEquipment($ship, $ship_id, 'weapons', 'weapon');
 //        return $this->onSuccess($ship);
-        return json_encode($ship_url,JSON_OBJECT_AS_ARRAY);
+        return json_encode($ship_url);
 
     }
 
