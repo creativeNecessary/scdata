@@ -28,7 +28,7 @@ class ShipController extends Controller
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
-        $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','icon','size','focus','max_crew','length']);
+        $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','store_large','size','focus','max_crew','length']);
         foreach ($ships as &$ship){
             $ship->queryChName();
         }
@@ -67,14 +67,6 @@ class ShipController extends Controller
         $ship_equipments = ShipEquipment::where([['ship_id', $ship_id], ['tag', $tag]])->get();
         foreach ($ship_equipments as &$ship_equipment) {
             $ship_equipment->queryChType();
-//            $equipment_id = $value->equipment;
-//            $equipment = Equipment::find($equipment_id);
-//            if ($equipment != null) {
-//                $ship_equipments[$ship_equipment]->setEquipment($equipment);
-//            } else {
-//                $obj = new stdClass();
-//                $ship_equipments[$ship_equipment]->setEquipment($obj);
-//            }
         }
         $ship->setShipEquipment($ship_field, $ship_equipments);
     }
