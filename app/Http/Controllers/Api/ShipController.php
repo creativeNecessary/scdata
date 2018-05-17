@@ -43,32 +43,29 @@ class ShipController extends Controller
         $input = $request->only(['ship_id']);
         $ship_id = $input['ship_id'];
         $ship = ShipModel::find($ship_id);
-        $ship_url = ShipUrl::select('url')->where([['ship_id', $ship_id], ['type', 'image']])->get();
-        $manufacturer = ManufacturerModel::where('id', $ship->manufacturer)->get();
+        $ship_store_large = ShipUrl::select('url')->where([['ship_id', $ship_id], ['type', 'image']])->get();
+        $manufacturer = ManufacturerModel::where('code', $ship->manufacturer_code)->get();
 
-        if(count($ship_url) == 0){
-            $ship_url = array(array('url'=>$ship->getIcon()));
+        if(count($ship_store_large) == 0){
+            $ship_store_large = array(array('url'=>$ship->getStore_Large()));
         }
-        $ship->setImageUrl($ship_url);
+        $ship->setImageUrl($ship_store_large);
         $ship->setManufacturer($manufacturer);
         $ship->queryChName();
 
-        $this->initShipEquipment($ship, $ship_id, 'avionics', 'avionic');
-        $this->initShipEquipment($ship, $ship_id, 'modular', 'modular');
-        $this->initShipEquipment($ship, $ship_id, 'propulsion', 'propulsion');
-        $this->initShipEquipment($ship, $ship_id, 'thrusters', 'thruster');
-        $this->initShipEquipment($ship, $ship_id, 'weapons', 'weapon');
+        $this->initShipEquipment($ship, $ship_id);
+
         return $this->onSuccess($ship);
 
     }
 
-    private function initShipEquipment($ship, $ship_id, $ship_field, $tag)
+    private function initShipEquipment($ship, $ship_id)
     {
-        $ship_equipments = ShipEquipment::where([['ship_id', $ship_id], ['tag', $tag]])->get();
+        $ship_equipments = ShipEquipment::where([['ship_id', $ship_id]])->get();
         foreach ($ship_equipments as &$ship_equipment) {
             $ship_equipment->queryChType();
         }
-        $ship->setShipEquipment($ship_field, $ship_equipments);
+        $ship->setShipEquipment($ship_equipments);
     }
 
 

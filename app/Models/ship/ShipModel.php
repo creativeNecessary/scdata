@@ -36,7 +36,7 @@ class ShipModel extends Model
         }
     }
 
-    public function getIcon(){
+    public function getStore_Large(){
         return $this->attributes['icon'];
     }
 
