@@ -25,6 +25,15 @@ class CheckAppDigitalSignature
 
     private function checkSignature(Request $request)
     {
+        if(!$request->has('timestamp')){
+            return false;
+        }
+        if(!$request->has('digital_signature')){
+            return false;
+        }
+        if(!$request->has('action')){
+            return false;
+        }
         $input = $request->only(['timestamp', 'digital_signature', 'action']);
         $timestamp = $input['timestamp'];
         $action = $input['action'];
