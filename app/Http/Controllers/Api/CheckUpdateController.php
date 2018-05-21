@@ -19,7 +19,8 @@ class CheckUpdateController extends Controller
 {
     private static $NEED_UPDATE = 100;
     private static $NEED_FORCE_UPDATE = 101;
-    private static $LAST_VERSION = 102;
+    private static $NOW_LAST_VERSION = 102;
+
     private   $nowVersionCode = 1;
     private  $needForceUpdateVersionCode = 1;
 
@@ -28,14 +29,14 @@ class CheckUpdateController extends Controller
 
         $versionCode = $request->only(['versionCode']);
         $obj = new stdClass();
-        if($versionCode <= $this->nowVersionCode){
+        if($versionCode < $this->nowVersionCode){
             if($versionCode <= $this->needForceUpdateVersionCode){
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
             }else{
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
             }
         }else{
-            $obj->code = CheckUpdateController::$LAST_VERSION;
+            $obj->code = CheckUpdateController::$NOW_LAST_VERSION;
         }
 
         return $this->onSuccess($obj);
