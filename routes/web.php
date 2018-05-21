@@ -20,3 +20,5 @@ Route::post('api/getShipList', 'ShipController@getShipList');
 Route::post('api/getShipDetail', 'ShipController@getShipDetail');
 Route::post('api/getSTLFile', 'ShipController@getSTLFile');
 Route::get('api/func/{filename}', 'ShipController@getFuncFile');
+Route::post('api/checkUpdate', 'CheckUpdateController@checkUpdate');
+
