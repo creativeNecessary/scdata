@@ -27,7 +27,8 @@ class CheckUpdateController extends Controller
 
     public function checkUpdate(Request $request){
 
-        $versionCode = $request->only(['versionCode']);
+        $data = $request->only(['versionCode']);
+        $versionCode = $data['versionCode'];
         $obj = new stdClass();
         if($versionCode < $this->nowVersionCode){
             if($versionCode <= $this->needForceUpdateVersionCode){
