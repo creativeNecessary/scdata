@@ -22,7 +22,7 @@ class CheckUpdateController extends Controller
     private static $NOW_LAST_VERSION = 102;
 
     private   $nowVersionCode = 2;
-    private  $needForceUpdateVersionCode = 1;
+    private  $needForceUpdateVersionCode = 0;
 
 
     public function checkUpdate(Request $request){
@@ -32,9 +32,9 @@ class CheckUpdateController extends Controller
         if($versionCode < $this->nowVersionCode){
             if($versionCode <= $this->needForceUpdateVersionCode){
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
-                $obj->version_focus ='TestTest';
             }else{
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
+                $obj->version_focus ='TestTest';
             }
         }else{
             $obj->code = CheckUpdateController::$NOW_LAST_VERSION;
