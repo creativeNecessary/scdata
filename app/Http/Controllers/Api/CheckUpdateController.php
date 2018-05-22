@@ -40,7 +40,7 @@ class CheckUpdateController extends Controller
             $obj->code = CheckUpdateController::$NOW_LAST_VERSION;
         }
 
-        return $this->onSuccess(gettype($versionCode));
+        return $this->onSuccess($versionCode);
 
     }
 
