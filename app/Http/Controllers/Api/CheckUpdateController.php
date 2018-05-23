@@ -27,19 +27,24 @@ class CheckUpdateController extends Controller
 
     public function checkUpdate(Request $request)
     {
+        $app_last_version_results = AppVersion::orderBy('id','desc')->take(1)->get();
+        $app_last_version = $app_last_version_results[0];
+        $nowVersionCode = $app_last_version->get_version_code();
+        $version_name = $app_last_version->get_version_name();
+        $version_focus = $app_last_version->get_version_focus();
 
         $data = $request->only(['versionCode']);
         $versionCode = $data['versionCode'];
         $obj = new stdClass();
-        if ($versionCode < $this->nowVersionCode) {
+        if ($versionCode < $nowVersionCode) {
             if ($versionCode <= $this->needForceUpdateVersionCode) {
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
-                $obj->version_focus = 'TestTest';
-                $obj->version_name = $this->version_name;
+                $obj->version_focus = $version_focus;
+                $obj->version_name = $version_name;
             } else {
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
-                $obj->version_focus = 'TestTest';
-                $obj->version_name = $this->version_name;
+                $obj->version_focus = $version_focus;
+                $obj->version_name = $version_name;
 
             }
         } else {
@@ -56,13 +61,12 @@ class CheckUpdateController extends Controller
         $app_last_version = $app_last_version_results[0];
         $filename = $app_last_version->get_apk_file_name();
 
-//        $path = resource_path($app_last_version['apk_file_name']);
-//        $headers = [
-//            'Content-Type' => 'text/html;charset=UTF-8'
-//        ];
+        $path = resource_path($app_last_version['apk_file_name']);
+        $headers = [
+            'Content-Type' => 'text/html;charset=UTF-8'
+        ];
 
-//        return response()->download($path, $filename, $headers);
-        return $this->onSuccess($filename);
+        return response()->download($path, $filename, $headers);
     }
 
 }
