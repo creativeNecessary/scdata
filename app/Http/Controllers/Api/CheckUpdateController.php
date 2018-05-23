@@ -61,7 +61,7 @@ class CheckUpdateController extends Controller
 //        ];
 
 //        return response()->download($path, $filename, $headers);
-        return $this->onSuccess(count($app_last_version));
+        return $app_last_version;
     }
 
 }
