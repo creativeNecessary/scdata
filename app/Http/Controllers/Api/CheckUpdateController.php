@@ -24,6 +24,7 @@ class CheckUpdateController extends Controller
     private $nowVersionCode = 2;
     private $needForceUpdateVersionCode = 0;
     private $version_name = '1.0.1';
+    private $application_name = 'sc_date_view';
 
 
     public function checkUpdate(Request $request)
@@ -49,6 +50,17 @@ class CheckUpdateController extends Controller
 
         return $this->onSuccess($obj);
 
+    }
+
+    public function getUpdateApkFile()
+    {
+        $filename = $this->application_name.'_'.$this->version_name.'-release.apk';
+        $path = resource_path('latest_apk/' . $filename);
+        $headers = [
+            'Content-Type' => 'text/html;charset=UTF-8'
+        ];
+
+        return response()->download($path, $filename, $headers);
     }
 
 }
