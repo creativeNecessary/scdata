@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Helpers\ResponseApi;
 use App\Http\Controllers\Controller;
+use App\Models\ship\AppVersion;
 use Illuminate\Http\Request;
 use stdClass;
 
@@ -21,10 +22,7 @@ class CheckUpdateController extends Controller
     private static $NEED_FORCE_UPDATE = 101;
     private static $NOW_LAST_VERSION = 102;
 
-    private $nowVersionCode = 2;
     private $needForceUpdateVersionCode = 0;
-    private $version_name = '1.0.1';
-    private $application_name = 'sc_date_view';
 
 
     public function checkUpdate(Request $request)
@@ -54,13 +52,16 @@ class CheckUpdateController extends Controller
 
     public function getUpdateApkFile()
     {
-        $filename = $this->application_name.'_'.$this->version_name.'-release.apk';
-        $path = resource_path('latest_apk/' . $filename);
-        $headers = [
-            'Content-Type' => 'text/html;charset=UTF-8'
-        ];
+        $app_last_version = AppVersion::orderBy('id','desc')->take(1)->get();
 
-        return response()->download($path, $filename, $headers);
+//        $filename = $this->application_name.'_'.$this->version_name.'-release.apk';
+//        $path = resource_path('latest_apk/' . $filename);
+//        $headers = [
+//            'Content-Type' => 'text/html;charset=UTF-8'
+//        ];
+
+//        return response()->download($path, $filename, $headers);
+        return $this->onSuccess(gettype($app_last_version));
     }
 
 }
