@@ -21,23 +21,29 @@ class CheckUpdateController extends Controller
     private static $NEED_FORCE_UPDATE = 101;
     private static $NOW_LAST_VERSION = 102;
 
-    private   $nowVersionCode = 2;
-    private  $needForceUpdateVersionCode = 0;
+    private $nowVersionCode = 2;
+    private $needForceUpdateVersionCode = 0;
+    private $version_name = '1.0.1';
 
 
-    public function checkUpdate(Request $request){
+    public function checkUpdate(Request $request)
+    {
 
         $data = $request->only(['versionCode']);
         $versionCode = $data['versionCode'];
         $obj = new stdClass();
-        if($versionCode < $this->nowVersionCode){
-            if($versionCode <= $this->needForceUpdateVersionCode){
+        if ($versionCode < $this->nowVersionCode) {
+            if ($versionCode <= $this->needForceUpdateVersionCode) {
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
-            }else{
+                $obj->version_focus = 'TestTest';
+                $obj->version_name = $this->version_name;
+            } else {
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
-                $obj->version_focus ='TestTest';
+                $obj->version_focus = 'TestTest';
+                $obj->version_name = $this->version_name;
+
             }
-        }else{
+        } else {
             $obj->code = CheckUpdateController::$NOW_LAST_VERSION;
         }
 
