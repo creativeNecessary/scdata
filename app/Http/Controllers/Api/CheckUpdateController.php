@@ -53,7 +53,7 @@ class CheckUpdateController extends Controller
     public function getUpdateApkFile()
     {
         $app_last_version = AppVersion::orderBy('id','desc')->take(1)->get();
-        $filename = $app_last_version->get_apk_file_name();
+//        $filename = $app_last_version->get_apk_file_name();
 
 //        $path = resource_path($app_last_version['apk_file_name']);
 //        $headers = [
