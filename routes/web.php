@@ -22,4 +22,6 @@ Route::post('api/getSTLFile', 'ShipController@getSTLFile');
 Route::get('api/func/{filename}', 'ShipController@getFuncFile');
 Route::post('api/checkUpdate', 'CheckUpdateController@checkUpdate');
 Route::post('api/getUpdateApkFile', 'CheckUpdateController@getUpdateApkFile');
+Route::post('api/getCommLinkList', 'CommLinkController@getCommLinkList');
+Route::post('api/getCommLinkDetail', 'CommLinkController@getCommLinkDetail');
 
