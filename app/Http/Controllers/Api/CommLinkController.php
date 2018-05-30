@@ -35,8 +35,8 @@ class CommLinkController extends Controller
 
     public function getCommLinkDetail(Request $request)
     {
-        $input = $request->only(['id']);
-        $comm_link_id = $input['id'];
+        $input = $request->only(['comm_link_id']);
+        $comm_link_id = $input['comm_link_id'];
         $comm_link_contents = CommLinkContent::where([['comm_link_id', $comm_link_id]])->get();
         return $this->onSuccess($comm_link_contents);
     }
