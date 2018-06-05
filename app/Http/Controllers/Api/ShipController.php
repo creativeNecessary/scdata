@@ -76,12 +76,10 @@ class ShipController extends Controller
         $input = $request->only(['page_num', 'per_page', 'type_content']);
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
-        $type_content = $input['type_content'];
         $start = $page_num * $per_page;
         $ships = null;
-        $ship_types = null;
-        if ($type_content != null && !empty($type_content)) {
-
+        if ($request->has('type_content')) {
+            $type_content = $input['type_content'];
             $ship_types = ShipType::where('type_content', $type_content)->take($per_page)->skip($start)->get();
             $ids = array();
             $index = 0;
@@ -91,9 +89,9 @@ class ShipController extends Controller
             }
             $ships = ShipModel::whereIn('id', $ids)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
 
-
         } else {
             $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+
         }
         if ($ships != null) {
             foreach ($ships as &$ship) {
