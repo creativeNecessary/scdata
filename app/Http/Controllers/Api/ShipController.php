@@ -89,7 +89,7 @@ class ShipController extends Controller
                 $ids[$index] = $ship_type->getShipId();
                 $index++;
             }
-            $ships = ShipModel::whereIn('id', $ids)->get();
+            $ships = ShipModel::whereIn('id', $ids)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
 
 
         } else {
