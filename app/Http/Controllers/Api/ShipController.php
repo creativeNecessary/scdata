@@ -9,6 +9,7 @@ use App\Models\ship\Equipment;
 use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipEquipment;
 use App\Models\ship\ShipModel;
+use App\Models\ship\ShipType;
 use App\Models\ship\ShipUrl;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -28,8 +29,8 @@ class ShipController extends Controller
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
-        $ships = ShipModel::take($per_page)->skip($start)->get(['id','name','url','store_large','size','focus','max_crew','length']);
-        foreach ($ships as &$ship){
+        $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+        foreach ($ships as &$ship) {
             $ship->queryChName();
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
@@ -46,8 +47,8 @@ class ShipController extends Controller
         $ship_store_large = ShipUrl::select('url')->where([['ship_id', $ship_id], ['type', 'image']])->get();
         $manufacturer = ManufacturerModel::where('code', $ship->manufacturer_code)->get();
 
-        if(count($ship_store_large) == 0){
-            $ship_store_large = array(array('url'=>$ship->getStore_Large()));
+        if (count($ship_store_large) == 0) {
+            $ship_store_large = array(array('url' => $ship->getStore_Large()));
         }
         $ship->setImageUrl($ship_store_large);
         $ship->setManufacturer($manufacturer);
@@ -68,6 +69,38 @@ class ShipController extends Controller
         $ship->setShipEquipment($ship_equipments);
     }
 
+
+    public function getShipListTest(Request $request)
+    {
+
+        $input = $request->only(['page_num', 'per_page', 'filter']);
+        $page_num = $input['page_num'];
+        $per_page = $input['per_page'];
+        $filter = $input['filter'];
+        $start = $page_num * $per_page;
+        $ships = null;
+        if ($filter != null && !empty($filte)) {
+
+            $ship_types = ShipType::take($per_page)->skip($start)->where('type_content', $filter)->get();
+            $ids = array();
+            $index = 0;
+            foreach ($ship_types as $ship_type){
+                $ids[$index] = $ship_type->getShipId();
+                $index++;
+            }
+            $ships =  DB::table('ship_en')->whereIn('id', $ids)->get();
+
+
+        }else{
+            $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+        }
+        foreach ($ships as &$ship) {
+            $ship->queryChName();
+        }
+//        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
+//        $ships = json_decode(json_encode($ships));
+        return $this->onSuccess($ships);
+    }
 
     public function getSTLFile(Request $request)
     {
@@ -102,15 +135,6 @@ class ShipController extends Controller
         return response()->download($path, $filename, $headers);
     }
 
-    public function getFuncFile($filename)
-    {
 
-        $path = resource_path('media/func/' . $filename);
-        $headers = [
-            'Content-Type' => 'text/html;charset=UTF-8'
-        ];
-
-        return response()->download($path, $filename, $headers);
-    }
 
 }
