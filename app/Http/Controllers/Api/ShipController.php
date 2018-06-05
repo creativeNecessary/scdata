@@ -25,13 +25,30 @@ class ShipController extends Controller
     public function getShipList(Request $request)
     {
 
-        $input = $request->only(['page_num', 'per_page']);
+        $input = $request->only(['page_num', 'per_page', 'type_content']);
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
-        $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
-        foreach ($ships as &$ship) {
-            $ship->queryChName();
+        $ships = null;
+        if ($request->has('type_content')) {
+            $type_content = $input['type_content'];
+            $ship_types = ShipType::where('type_content', $type_content)->take($per_page)->skip($start)->get();
+            $ids = array();
+            $index = 0;
+            foreach ($ship_types as $ship_type) {
+                $ids[$index] = $ship_type->getShipId();
+                $index++;
+            }
+            $ships = ShipModel::whereIn('id', $ids)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+
+        } else {
+            $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+
+        }
+        if ($ships != null) {
+            foreach ($ships as &$ship) {
+                $ship->queryChName();
+            }
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
@@ -70,38 +87,7 @@ class ShipController extends Controller
     }
 
 
-    public function getShipListTest(Request $request)
-    {
 
-        $input = $request->only(['page_num', 'per_page', 'type_content']);
-        $page_num = $input['page_num'];
-        $per_page = $input['per_page'];
-        $start = $page_num * $per_page;
-        $ships = null;
-        if ($request->has('type_content')) {
-            $type_content = $input['type_content'];
-            $ship_types = ShipType::where('type_content', $type_content)->take($per_page)->skip($start)->get();
-            $ids = array();
-            $index = 0;
-            foreach ($ship_types as $ship_type) {
-                $ids[$index] = $ship_type->getShipId();
-                $index++;
-            }
-            $ships = ShipModel::whereIn('id', $ids)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
-
-        } else {
-            $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
-
-        }
-        if ($ships != null) {
-            foreach ($ships as &$ship) {
-                $ship->queryChName();
-            }
-        }
-//        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
-//        $ships = json_decode(json_encode($ships));
-        return $this->onSuccess($ships);
-    }
 
     public function getSTLFile(Request $request)
     {
