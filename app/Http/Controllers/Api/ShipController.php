@@ -102,7 +102,7 @@ class ShipController extends Controller
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
-        return $this->onSuccess($ship_types);
+        return $this->onSuccess($type_content);
     }
 
     public function getSTLFile(Request $request)
