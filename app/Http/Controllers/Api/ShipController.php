@@ -85,14 +85,14 @@ class ShipController extends Controller
             $ship_types = ShipType::where('type_content', $filter)->take($per_page)->skip($start)->get();
             $ids = array();
             $index = 0;
-            foreach ($ship_types as $ship_type){
+            foreach ($ship_types as $ship_type) {
                 $ids[$index] = $ship_type->getShipId();
                 $index++;
             }
-            $ships =  DB::table('ship_en')->whereIn('id', $ids)->get();
+            $ships = DB::table('ship_en')->whereIn('id', $ids)->get();
 
 
-        }else{
+        } else {
             $ships = ShipModel::take($per_page)->skip($start)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
         }
         foreach ($ships as &$ship) {
@@ -100,7 +100,7 @@ class ShipController extends Controller
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
-        return $this->onSuccess($ship_types);
+        return $this->onSuccess($filter);
     }
 
     public function getSTLFile(Request $request)
@@ -135,7 +135,6 @@ class ShipController extends Controller
         ];
         return response()->download($path, $filename, $headers);
     }
-
 
 
 }
