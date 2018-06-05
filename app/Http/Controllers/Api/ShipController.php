@@ -79,6 +79,7 @@ class ShipController extends Controller
         $filter = $input['filter'];
         $start = $page_num * $per_page;
         $ships = null;
+        $ship_types = null;
         if ($filter != null && !empty($filte)) {
 
             $ship_types = ShipType::take($per_page)->skip($start)->where('type_content', $filter)->get();
