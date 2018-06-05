@@ -82,7 +82,7 @@ class ShipController extends Controller
         $ship_types = null;
         if ($filter != null && !empty($filte)) {
 
-            $ship_types = ShipType::take($per_page)->skip($start)->where('type_content', $filter)->get();
+            $ship_types = ShipType::where('type_content', $filter)->take($per_page)->skip($start)->get();
             $ids = array();
             $index = 0;
             foreach ($ship_types as $ship_type){
