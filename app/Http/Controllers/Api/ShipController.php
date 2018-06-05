@@ -73,16 +73,16 @@ class ShipController extends Controller
     public function getShipListTest(Request $request)
     {
 
-        $input = $request->only(['page_num', 'per_page', 'filter']);
+        $input = $request->only(['page_num', 'per_page', 'type_content']);
         $page_num = $input['page_num'];
         $per_page = $input['per_page'];
-        $filter = $input['filter'];
+        $type_content = $input['type_content'];
         $start = $page_num * $per_page;
         $ships = null;
         $ship_types = null;
-        if ($filter != null && !empty($filte)) {
+        if ($type_content != null && !empty($type_content)) {
 
-            $ship_types = ShipType::where('type_content', $filter)->take($per_page)->skip($start)->get();
+            $ship_types = ShipType::where('type_content', $type_content)->take($per_page)->skip($start)->get();
             $ids = array();
             $index = 0;
             foreach ($ship_types as $ship_type) {
@@ -100,8 +100,7 @@ class ShipController extends Controller
         }
 //        $ships = DB::select('select id,name,url,icon,size,focus,max_crew,length from ship_en LIMIT ? , ?', [$start, $per_page]);
 //        $ships = json_decode(json_encode($ships));
-//        return $this->onSuccess($filter);
-        return $page_num;
+        return $this->onSuccess($ships);
     }
 
     public function getSTLFile(Request $request)
