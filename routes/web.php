@@ -24,5 +24,6 @@ Route::post('api/checkUpdate', 'CheckUpdateController@checkUpdate');
 Route::post('api/getUpdateApkFile', 'CheckUpdateController@getUpdateApkFile');
 Route::post('api/getCommLinkList', 'CommLinkController@getCommLinkList');
 Route::post('api/getCommLinkDetail', 'CommLinkController@getCommLinkDetail');
+Route::post('api/getFilterData', 'CommLinkController@getFilterData');
 
 

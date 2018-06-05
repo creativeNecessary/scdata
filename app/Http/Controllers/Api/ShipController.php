@@ -10,6 +10,7 @@ use App\Models\ship\ManufacturerModel;
 use App\Models\ship\ShipEquipment;
 use App\Models\ship\ShipModel;
 use App\Models\ship\ShipType;
+use App\Models\ship\ShipTypeConstant;
 use App\Models\ship\ShipUrl;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -86,6 +87,11 @@ class ShipController extends Controller
         $ship->setShipEquipment($ship_equipments);
     }
 
+
+    public function getFilterData(){
+        $types = ShipTypeConstant::all();
+        return $this->onSuccess($types);
+    }
 
 
 
