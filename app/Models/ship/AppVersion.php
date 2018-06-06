@@ -32,4 +32,8 @@ class AppVersion extends Model
     public function get_apk_file_name(){
         return $this->attributes['apk_file_name'];
     }
+
+    public function get_state(){
+        return $this->attributes['state'];
+    }
 }

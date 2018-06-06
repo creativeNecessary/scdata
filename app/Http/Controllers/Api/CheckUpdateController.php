@@ -32,11 +32,11 @@ class CheckUpdateController extends Controller
         $nowVersionCode = $app_last_version->get_version_code();
         $version_name = $app_last_version->get_version_name();
         $version_focus = $app_last_version->get_version_focus();
-
+        $state = $app_last_version->get_state();
         $data = $request->only(['versionCode']);
         $versionCode = $data['versionCode'];
         $obj = new stdClass();
-        if ($versionCode < $nowVersionCode) {
+        if ($versionCode < $nowVersionCode && $state == 'release') {
             if ($versionCode <= $this->needForceUpdateVersionCode) {
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
                 $obj->version_focus = $version_focus;
