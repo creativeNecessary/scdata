@@ -55,6 +55,36 @@ class CheckUpdateController extends Controller
 
     }
 
+    public function checkUpdateTest(Request $request)
+    {
+        $app_last_version_results = AppVersion::orderBy('id','desc')->take(1)->get();
+        $app_last_version = $app_last_version_results[0];
+        $nowVersionCode = $app_last_version->get_version_code();
+        $version_name = $app_last_version->get_version_name();
+        $version_focus = $app_last_version->get_version_focus();
+        $state = $app_last_version->get_state();
+        $data = $request->only(['versionCode']);
+        $versionCode = $data['versionCode'];
+        $obj = new stdClass();
+        if ($versionCode < $nowVersionCode && $state == 'test') {
+            if ($versionCode <= $this->needForceUpdateVersionCode) {
+                $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
+                $obj->version_focus = $version_focus;
+                $obj->version_name = $version_name;
+            } else {
+                $obj->code = CheckUpdateController::$NEED_UPDATE;
+                $obj->version_focus = $version_focus;
+                $obj->version_name = $version_name;
+
+            }
+        } else {
+            $obj->code = CheckUpdateController::$NOW_LAST_VERSION;
+        }
+
+        return $this->onSuccess($obj);
+
+    }
+
     public function getUpdateApkFile()
     {
         $app_last_version_results = AppVersion::orderBy('id','desc')->take(1)->get();

@@ -26,4 +26,7 @@ Route::post('api/getCommLinkList', 'CommLinkController@getCommLinkList');
 Route::post('api/getCommLinkDetail', 'CommLinkController@getCommLinkDetail');
 Route::post('api/getFilterData', 'ShipController@getFilterData');
 
+Route::post('api/checkUpdateTest', 'CheckUpdateController@checkUpdateTest');
+
+
 
