@@ -31,7 +31,7 @@ class ShipController extends Controller
         $per_page = $input['per_page'];
         $start = $page_num * $per_page;
         $ships = null;
-        if ($request->has('type_content')) {
+        if ($request->has('type_content') && !empty($input['type_content'])) {
             $type_content = $input['type_content'];
             $ship_types = ShipType::where('type_content', $type_content)->take($per_page)->skip($start)->get();
             $ids = array();
