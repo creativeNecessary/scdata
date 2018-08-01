@@ -56,6 +56,19 @@ class ShipController extends Controller
         return $this->onSuccess($ships);
     }
 
+    public function getAllShipName(Request $request)
+    {
+        $ships = ShipModel::get(['id', 'name']);
+        if ($ships != null) {
+            foreach ($ships as &$ship) {
+                $ship->queryChName();
+            }
+        }
+        return $this->onSuccess($ships);
+    }
+
+
+
     //
     public function getShipDetail(Request $request)
     {
