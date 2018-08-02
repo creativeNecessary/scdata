@@ -28,6 +28,8 @@ Route::post('api/getFilterData', 'ShipController@getFilterData');
 
 Route::post('api/getAllShipName', 'ShipController@getAllShipName');
 
+Route::post('api/searchShip', 'ShipController@searchShip');
+
 Route::post('api/checkUpdateTest', 'CheckUpdateController@checkUpdateTest');
 
 

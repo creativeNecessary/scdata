@@ -67,7 +67,22 @@ class ShipController extends Controller
         return $this->onSuccess($ships);
     }
 
+    public function searchShip(Request $request)
+    {
 
+        $input = $request->only(['ship_id']);
+        $ships = null;
+        if ($request->has('ship_id') && !empty($input['ship_id'])) {
+            $ship_id = $input['ship_id'];
+            $ships = ShipModel::where('id', $ship_id)->get(['id', 'name', 'url', 'store_large', 'size', 'focus', 'max_crew', 'length']);
+        }
+        if ($ships != null) {
+            foreach ($ships as &$ship) {
+                $ship->queryChName();
+            }
+        }
+        return $this->onSuccess($ships);
+    }
 
     //
     public function getShipDetail(Request $request)
