@@ -36,4 +36,9 @@ class AppVersion extends Model
     public function get_state(){
         return $this->attributes['state'];
     }
+
+    public function get_apk_download_path(){
+        return $this->attributes['apk_download_path'];
+    }
+
 }

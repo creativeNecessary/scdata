@@ -32,6 +32,7 @@ class CheckUpdateController extends Controller
         $nowVersionCode = $app_last_version->get_version_code();
         $version_name = $app_last_version->get_version_name();
         $version_focus = $app_last_version->get_version_focus();
+        $apk_download_path = $app_last_version->get_apk_download_path();
         $state = $app_last_version->get_state();
         $data = $request->only(['versionCode']);
         $versionCode = $data['versionCode'];
@@ -41,10 +42,12 @@ class CheckUpdateController extends Controller
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
                 $obj->version_focus = $version_focus;
                 $obj->version_name = $version_name;
+                $obj->apk_download_path = $apk_download_path;
             } else {
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
                 $obj->version_focus = $version_focus;
                 $obj->version_name = $version_name;
+                $obj->apk_download_path = $apk_download_path;
 
             }
         } else {
@@ -63,6 +66,7 @@ class CheckUpdateController extends Controller
         $version_name = $app_last_version->get_version_name();
         $version_focus = $app_last_version->get_version_focus();
         $state = $app_last_version->get_state();
+        $apk_download_path = $app_last_version->get_apk_download_path();
         $data = $request->only(['versionCode']);
         $versionCode = $data['versionCode'];
         $obj = new stdClass();
@@ -71,10 +75,12 @@ class CheckUpdateController extends Controller
                 $obj->code = CheckUpdateController::$NEED_FORCE_UPDATE;
                 $obj->version_focus = $version_focus;
                 $obj->version_name = $version_name;
+                $obj->apk_download_path = $apk_download_path;
             } else {
                 $obj->code = CheckUpdateController::$NEED_UPDATE;
                 $obj->version_focus = $version_focus;
                 $obj->version_name = $version_name;
+                $obj->apk_download_path = $apk_download_path;
 
             }
         } else {
