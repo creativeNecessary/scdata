@@ -97,7 +97,7 @@ class CheckUpdateController extends Controller
         $app_last_version = $app_last_version_results[0];
         $filename = $app_last_version->get_apk_file_name();
 
-        $path = resource_path('latest_apk/'.$filename);
+        $path = resource_path('last_release_apk/'.$filename);
         $headers = [
             'Content-Type' => 'text/html;charset=UTF-8',
              'ScFileName' => $filename

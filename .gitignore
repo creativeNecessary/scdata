@@ -13,6 +13,6 @@ yarn-error.log
 .env
 database.php
 /resources/media
-/resources/latest_apk
+/resources/last_release_apk
 composer.json
 composer.lock
