@@ -32,7 +32,7 @@ Route::post('api/searchShip', 'ShipController@searchShip');
 
 Route::post('api/checkUpdateTest', 'CheckUpdateController@checkUpdateTest');
 
-Route::post('api/getShipListTest', 'ShipController@getShipList');
+Route::post('api/getShipListTest', 'ShipController@getShipListTest');
 
 
 
